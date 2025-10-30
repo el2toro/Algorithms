@@ -10,7 +10,7 @@ public static class SortAlgorithms
     /// preserves the order of equal elements.</remarks>
     /// <param name="array">The array of integers to sort. The array must not be null.</param>
     /// <returns>A reference to the input array, with its elements sorted in ascending order.</returns>
-    public static int[] BubbleSort(int[] array)
+    public static IList<T> BubbleSort<T>(IList<T> array) where T : IComparable<T>
     {
         bool swapped = true;
 
@@ -20,10 +20,10 @@ public static class SortAlgorithms
             swapped = false;
 
             // Each pass moves the largest unsorted element to its correct position at the end,
-            for (int i = 0; i < array.Length - 1; i++)
+            for (int i = 0; i < array.Count - 1; i++)
             {
                 //it checks each pair of neighboring elements.
-                if (array[i] > array[i + 1])
+                if (array[i].CompareTo(array[i + 1]) > 0)
                 {
                     //if the left element is bigger than the right, swap them. 
                     (array[i], array[i + 1]) = (array[i + 1], array[i]);
