@@ -32,7 +32,6 @@ public static class SortAlgorithms
                 }
             }
         }
-
         return array;
     }
 
@@ -42,17 +41,17 @@ public static class SortAlgorithms
     /// <remarks>This method modifies the input array directly and does not return a new array. The sort is
     /// not stable, and the algorithm has O(n^2) time complexity, which may be inefficient for large arrays.</remarks>
     /// <param name="array">The array of integers to sort. The array is sorted in place and must not be null.</param>
-    public static int[] SelectionSort(int[] array)
+    public static IList<T> SelectionSort<T>(IList<T> array) where T : IComparable<T>
     {
 
-        for (int i = 0; i < array.Length - 1; i++)
+        for (int i = 0; i < array.Count - 1; i++)
         {
             int minIndex = i;
 
             // Find the index of the minimum element in the unsorted portion
-            for (int j = i + 1; j < array.Length; j++)
+            for (int j = i + 1; j < array.Count; j++)
             {
-                if (array[j] < array[minIndex])
+                if (array[minIndex].CompareTo(array[j]) > 0)
                 {
                     minIndex = j;
                 }
@@ -65,7 +64,6 @@ public static class SortAlgorithms
         return array;
     }
 
-
     /// <summary>
     /// Sorts the elements of the specified list of integers in ascending order using the quicksort algorithm.
     /// </summary>
@@ -74,7 +72,7 @@ public static class SortAlgorithms
     /// contains a single element, it is returned as is.</remarks>
     /// <param name="array">The list of integers to sort. Cannot be null.</param>
     /// <returns>A new list containing the sorted elements of the input list in ascending order.</returns>
-    public static List<int> QuickSort(List<int> array)
+    public static IList<T> QuickSort<T>(IList<T> array) where T : IComparable<T>
     {
 
         // Base case
@@ -83,13 +81,13 @@ public static class SortAlgorithms
 
         var pivot = array![0];
 
-        var less = new List<int>();
-        var greater = new List<int>();
+        var less = new List<T>();
+        var greater = new List<T>();
 
         // Single pass over the array (skip index 0)
         for (int i = 1; i < array.Count; i++)
         {
-            if (array[i] <= pivot)
+            if (array[i].CompareTo(pivot) <= 0)
             {
                 less.Add(array[i]);
             }
@@ -100,7 +98,7 @@ public static class SortAlgorithms
         }
 
         // Recursively sort less and greater, then combine
-        var sorted = new List<int>(array.Count); // preallocate for efficiency
+        var sorted = new List<T>(array.Count); // preallocate for efficiency
 
         sorted.AddRange(QuickSort(less));
         sorted.Add(pivot);
