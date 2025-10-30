@@ -1,4 +1,4 @@
-﻿namespace Search;
+﻿namespace AlgorithmImplementations;
 
 public static class SearchAlgorithms
 {
