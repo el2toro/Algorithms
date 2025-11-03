@@ -105,7 +105,7 @@
 class Graph
 {
     private Dictionary<int, List<int>> adjacencyList = new();
-
+    private List<int> result = new List<int>();
     public void AddEdge(int src, int dest)
     {
         if (!adjacencyList.ContainsKey(src))
@@ -119,7 +119,6 @@ class Graph
     public List<int> DepthFirstSearch(int start)
     {
         // This list will store the order in which vertices are visited
-        var result = new List<int>();
         var visited = new HashSet<int>();
         var stack = new Stack<int>();
 
@@ -143,6 +142,28 @@ class Graph
                     for (int i = neighbors.Count - 1; i >= 0; i--)
                         stack.Push(neighbors[i]);
                 }
+            }
+        }
+
+        return result;
+    }
+
+    public List<int> DepthFirstSearchRecursive(int start)
+    {
+        var visited = new HashSet<int>();
+        var stack = new Stack<int>();
+
+        if (visited.Contains(start))
+            return new List<int>();
+
+        visited.Add(start);
+        result.Add(start);
+
+        if (adjacencyList.ContainsKey(start))
+        {
+            foreach (var neighbor in adjacencyList[start])
+            {
+                DepthFirstSearchRecursive(neighbor);
             }
         }
 
