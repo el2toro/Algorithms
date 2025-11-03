@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="AlgorithmImplementations/AlgorithmImplementations.csproj" />
+  <Project Path="AlgorithmsImplementations.Tests/AlgorithmImplementations.Tests.csproj" Id="4df176b3-9bbf-46ce-a726-ddbe31d44e3a" />
 </Solution>
